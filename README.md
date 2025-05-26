@@ -123,6 +123,11 @@ And join the Nx community:
 
 - Create nestjs app via nx console
 
+- Add prisma
+    - `npx prisma init`
+    - create some basic schema
+    - `npx prisma migrate dev --name init`
+
 
 ### Prisma
 

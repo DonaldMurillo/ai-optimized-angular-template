@@ -14,7 +14,21 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@ai-optimized-angular-template/api-dtos": [
+        "libs/api/api-dtos/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/api-controllers": [
+        "libs/api/controllers/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/api-interceptors": [
+        "libs/api/interceptors/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/prisma": ["libs/api/prisma/src/index.ts"],
+      "@ai-optimized-angular-template/api-services": [
+        "libs/api/services/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
