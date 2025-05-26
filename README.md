@@ -1,4 +1,4 @@
-# AiOptimzedAngularTemplate
+# AiOptimizedAngularTemplate
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
@@ -99,3 +99,22 @@ And join the Nx community:
 - [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
 - [Our Youtube channel](https://www.youtube.com/@nxdevtools)
 - [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+
+
+### This template was
+
+- NX `npx create-nx-workspace@latest`
+✔ Where would you like to create your workspace? · ai-optimized-angular-template
+✔ Which stack do you want to use? · angular
+✔ Integrated monorepo, or standalone project? · integrated
+✔ Application name · ui
+✔ Which bundler would you like to use? · esbuild
+✔ Default stylesheet format · scss
+✔ Do you want to enable Server-Side Rendering (SSR) and Static Site Generation (SSG/Prerendering)? · Yes
+✔ Would you like to use the Server Routing and App Engine APIs (Developer Preview) for this server application? · Yes
+✔ Which unit test runner would you like to use? · vitest
+✔ Test runner to use for end to end (E2E) tests · playwright
+✔ Which CI provider would you like to use? · skip
+✔ Would you like remote caching to make your build faster? · skip
+
+- Add tailwind via nx console
