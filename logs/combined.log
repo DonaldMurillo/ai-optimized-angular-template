@@ -13,3 +13,13 @@
 {"context":"AppController","level":"info","message":"Creating new user","timestamp":"2025-05-26T23:20:02.402Z","userEmail":"john@example.com"}
 {"context":"AppService","level":"info","message":"Creating user in service","timestamp":"2025-05-26T23:20:02.402Z","userEmail":"john@example.com"}
 {"context":"AppService","level":"info","message":"User created successfully","timestamp":"2025-05-26T23:20:02.402Z","userId":"2p6ixnwpp"}
+{"context":"HTTP","ip":"::1","level":"info","message":"Incoming Request","method":"GET","timestamp":"2025-05-26T23:29:22.916Z","url":"/api/health","userAgent":"curl/8.7.1"}
+{"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":271,"responseTime":"39ms","statusCode":200,"timestamp":"2025-05-26T23:29:22.954Z","url":"/api/health"}
+{"context":"HTTP","ip":"::1","level":"info","message":"Incoming Request","method":"GET","timestamp":"2025-05-26T23:29:30.070Z","url":"/api/health/ready","userAgent":"curl/8.7.1"}
+{"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":101,"responseTime":"1ms","statusCode":200,"timestamp":"2025-05-26T23:29:30.071Z","url":"/api/health/ready"}
+{"context":"HTTP","ip":"::1","level":"info","message":"Incoming Request","method":"GET","timestamp":"2025-05-26T23:29:37.797Z","url":"/api/health/live","userAgent":"curl/8.7.1"}
+{"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":107,"responseTime":"0ms","statusCode":200,"timestamp":"2025-05-26T23:29:37.797Z","url":"/api/health/live"}
+{"context":"HTTP","ip":"::1","level":"info","message":"Incoming Request","method":"GET","timestamp":"2025-05-26T23:29:47.583Z","url":"/api","userAgent":"curl/8.7.1"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:29:47.584Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:29:47.584Z"}
+{"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":23,"responseTime":"1ms","statusCode":200,"timestamp":"2025-05-26T23:29:47.585Z","url":"/api"}

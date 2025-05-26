@@ -5,7 +5,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PrismaService } from '@ai-optimized-angular-template/prisma';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { WinstonModule } from 'nest-winston';
-import { APP_GUARD } from '@nestjs/core';
+import { TerminusModule } from '@nestjs/terminus';
+import { HealthController } from './health/health.controller';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import * as winston from 'winston';
 
 @Module({
@@ -31,6 +34,8 @@ import * as winston from 'winston';
         limit: 1000, // 1000 requests per hour
       },
     ]),
+    // Health checks
+    TerminusModule,
     // Winston Logging Configuration
     WinstonModule.forRoot({
       transports: [
@@ -61,13 +66,17 @@ import * as winston from 'winston';
       ],
     }),
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [
     AppService, 
     PrismaService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
     },
   ],
 })

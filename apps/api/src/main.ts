@@ -6,12 +6,22 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
+
+  // Security middleware
+  app.use(helmet());
+  
+  // CORS configuration
+  app.enableCors({
+    origin: ['http://localhost:4200', 'http://localhost:3000'], // Add your frontend URLs
+    credentials: true,
+  });
 
   // Global Validation Pipe
   app.useGlobalPipes(
