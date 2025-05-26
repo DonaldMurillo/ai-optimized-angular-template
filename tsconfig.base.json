@@ -27,17 +27,40 @@
       "@ai-optimized-angular-template/api-services": [
         "libs/api/services/src/index.ts"
       ],
+      "@ai-optimized-angular-template/components": [
+        "libs/ui/components/src/index.ts"
+      ],
       "@ai-optimized-angular-template/consts": [
         "libs/shared/consts/src/index.ts"
       ],
       "@ai-optimized-angular-template/enums": [
         "libs/shared/enums/src/index.ts"
       ],
+      "@ai-optimized-angular-template/injectable-utils": [
+        "libs/ui/injectable-utils/src/index.ts"
+      ],
       "@ai-optimized-angular-template/interfaces": [
         "libs/shared/interfaces/src/index.ts"
       ],
+      "@ai-optimized-angular-template/pages": ["libs/ui/pages/src/index.ts"],
       "@ai-optimized-angular-template/prisma": ["libs/api/prisma/src/index.ts"],
-      "@ai-optimized-angular-template/utils": ["libs/shared/utils/src/index.ts"]
+      "@ai-optimized-angular-template/services": [
+        "libs/ui/services/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/ui-guards": [
+        "libs/ui/guards/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/ui-interceptors": [
+        "libs/ui/interceptors/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/ui-resolvers": [
+        "libs/ui/resolvers/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/ui-utils": ["libs/ui/utils/src/index.ts"],
+      "@ai-optimized-angular-template/utils": [
+        "libs/shared/utils/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/widgets": ["libs/ui/widgets/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
