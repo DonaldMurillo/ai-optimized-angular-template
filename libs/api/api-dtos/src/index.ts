@@ -1,1 +1,1 @@
-export * from './lib/api-dtos.module';
+export * from './lib/delete-me';

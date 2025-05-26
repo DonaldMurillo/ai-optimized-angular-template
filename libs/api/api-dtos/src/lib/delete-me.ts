@@ -1,0 +1,1 @@
+export const deleteme = 'delete-me';

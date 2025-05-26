@@ -23,3 +23,9 @@
 {"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:29:47.584Z"}
 {"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:29:47.584Z"}
 {"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":23,"responseTime":"1ms","statusCode":200,"timestamp":"2025-05-26T23:29:47.585Z","url":"/api"}
+{"context":"HTTP","ip":"::1","level":"info","message":"Incoming Request","method":"GET","timestamp":"2025-05-26T23:44:10.941Z","url":"/api","userAgent":"curl/8.7.1"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:44:10.942Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:44:10.942Z"}
+{"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":23,"responseTime":"2ms","statusCode":200,"timestamp":"2025-05-26T23:44:10.943Z","url":"/api"}
+{"context":"HTTP","ip":"::1","level":"info","message":"Incoming Request","method":"GET","timestamp":"2025-05-26T23:44:51.094Z","url":"/api/health","userAgent":"curl/8.7.1"}
+{"context":"HTTP","level":"info","message":"Request Completed","method":"GET","responseSize":271,"responseTime":"36ms","statusCode":200,"timestamp":"2025-05-26T23:44:51.130Z","url":"/api/health"}

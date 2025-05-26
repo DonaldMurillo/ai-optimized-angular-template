@@ -6,8 +6,8 @@ import { PrismaService } from '@ai-optimized-angular-template/prisma';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { WinstonModule } from 'nest-winston';
 import { TerminusModule } from '@nestjs/terminus';
-import { HealthController } from './health/health.controller';
-import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { HealthController } from '@ai-optimized-angular-template/api-controllers';
+import { LoggingInterceptor } from '@ai-optimized-angular-template/api-interceptors';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import * as winston from 'winston';
 
