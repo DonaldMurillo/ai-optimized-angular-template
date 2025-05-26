@@ -118,3 +118,5 @@ And join the Nx community:
 ✔ Would you like remote caching to make your build faster? · skip
 
 - Add tailwind via nx console
+
+- Add nestjs app via nx console `nx add @nx/nest`
