@@ -128,6 +128,8 @@ And join the Nx community:
     - create some basic schema
     - `npx prisma migrate dev --name init`
 
+- Add libs
+
 
 ### Prisma
 

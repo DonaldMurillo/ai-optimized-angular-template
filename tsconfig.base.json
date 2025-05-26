@@ -15,19 +15,29 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ai-optimized-angular-template/api-dtos": [
-        "libs/api/api-dtos/src/index.ts"
-      ],
       "@ai-optimized-angular-template/api-controllers": [
         "libs/api/controllers/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/api-dtos": [
+        "libs/api/api-dtos/src/index.ts"
       ],
       "@ai-optimized-angular-template/api-interceptors": [
         "libs/api/interceptors/src/index.ts"
       ],
-      "@ai-optimized-angular-template/prisma": ["libs/api/prisma/src/index.ts"],
       "@ai-optimized-angular-template/api-services": [
         "libs/api/services/src/index.ts"
-      ]
+      ],
+      "@ai-optimized-angular-template/consts": [
+        "libs/shared/consts/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/enums": [
+        "libs/shared/enums/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/interfaces": [
+        "libs/shared/interfaces/src/index.ts"
+      ],
+      "@ai-optimized-angular-template/prisma": ["libs/api/prisma/src/index.ts"],
+      "@ai-optimized-angular-template/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
