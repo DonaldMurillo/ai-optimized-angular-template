@@ -1,2 +1,15 @@
 {"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:17:42.961Z"}
 {"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:17:42.962Z"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:19:16.743Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:19:16.743Z"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:19:39.344Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:19:39.344Z"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:19:39.855Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:19:39.855Z"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:19:40.367Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:19:40.367Z"}
+{"context":"AppController","level":"info","message":"Getting application data","timestamp":"2025-05-26T23:19:40.878Z"}
+{"context":"AppService","level":"info","message":"Retrieving application data","timestamp":"2025-05-26T23:19:40.878Z"}
+{"context":"AppController","level":"info","message":"Creating new user","timestamp":"2025-05-26T23:20:02.402Z","userEmail":"john@example.com"}
+{"context":"AppService","level":"info","message":"Creating user in service","timestamp":"2025-05-26T23:20:02.402Z","userEmail":"john@example.com"}
+{"context":"AppService","level":"info","message":"User created successfully","timestamp":"2025-05-26T23:20:02.402Z","userId":"2p6ixnwpp"}
