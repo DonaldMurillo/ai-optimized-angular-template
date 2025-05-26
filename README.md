@@ -119,4 +119,6 @@ And join the Nx community:
 
 - Add tailwind via nx console
 
-- Add nestjs app via nx console `nx add @nx/nest`
+- Add nestjs package via nx console `nx add @nx/nest`
+
+- Create nestjs app via nx console
