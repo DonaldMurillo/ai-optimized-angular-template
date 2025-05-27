@@ -16,28 +16,67 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 		TechStackItemComponent
 	],
 	host: {
-		class: 'block p-8 bg-gray-50 dark:bg-gray-900 min-h-screen'
+		class: 'block bg-gray-50 dark:bg-gray-900 min-h-screen'
 	},
 	template: `
-		<div class="max-w-6xl mx-auto space-y-12">
-			<div class="text-center">
-				<h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-					🎨 Component Showcase
-				</h1>
-				<p class="text-lg text-gray-600 dark:text-gray-300">
-					A demonstration of all reusable UI components extracted from the pages component
-				</p>
+		<!-- Hero Section with Navigation -->
+		<div class="bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-16 px-8">
+			<div class="max-w-6xl mx-auto">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-6">
+						<div class="p-3 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+							<span class="text-3xl">🎨</span>
+						</div>
+						<h1 class="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+							Component Showcase
+						</h1>
+					</div>
+					<p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+						A comprehensive demonstration of all reusable UI components built with Angular 18+, 
+						Tailwind CSS, and modern development patterns
+					</p>
+				</div>
+				
+				<!-- Quick Navigation -->
+				<div class="flex flex-wrap justify-center gap-3 mb-8">
+					@for (section of navigationSections(); track section.id) {
+						<a 
+							[href]="'#' + section.id"
+							class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg 
+								   shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 
+								   border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600">
+							{{ section.label }}
+						</a>
+					}
+				</div>
 			</div>
+		</div>
+
+		<!-- Main Content -->
+		<div class="max-w-7xl mx-auto px-8 py-16 space-y-20">
 
 			<!-- Buttons Section -->
-			<section class="space-y-6">
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-					Button Components
-				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div class="space-y-4">
-						<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Primary Buttons</h3>
-						<div class="space-y-2">
+			<section id="buttons" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">🎯</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Button Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Interactive buttons with multiple variants, sizes, and states for every use case
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					<!-- Primary Buttons Column -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Primary Actions</h3>
+						</div>
+						<div class="space-y-4">
 							<ui-button 
 								[data]="{ text: 'Small Primary', icon: '🚀' }"
 								[config]="{ variant: 'primary', size: 'sm' }">
@@ -52,9 +91,14 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 							</ui-button>
 						</div>
 					</div>
-					<div class="space-y-4">
-						<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Secondary Buttons</h3>
-						<div class="space-y-2">
+
+					<!-- Secondary Buttons Column -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-gray-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Secondary Actions</h3>
+						</div>
+						<div class="space-y-4">
 							<ui-button 
 								[data]="{ text: 'Small Secondary' }"
 								[config]="{ variant: 'secondary', size: 'sm' }">
@@ -69,9 +113,14 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 							</ui-button>
 						</div>
 					</div>
-					<div class="space-y-4">
-						<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Special States</h3>
-						<div class="space-y-2">
+
+					<!-- Special States Column -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Special States</h3>
+						</div>
+						<div class="space-y-4">
 							<ui-button 
 								[data]="{ text: 'Loading...' }"
 								[config]="{ variant: 'primary', loading: true }">
@@ -90,14 +139,27 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 			</section>
 
 			<!-- Badges Section -->
-			<section class="space-y-6">
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-					Badge Components
-				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div class="space-y-4">
-						<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Status Badges</h3>
-						<div class="space-y-2">
+			<section id="badges" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">🏷️</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Badge Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Versatile badges for status indicators, labels, and categorization
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					<!-- Status Badges -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Status Indicators</h3>
+						</div>
+						<div class="space-y-3">
 							@for (color of badgeColors(); track color) {
 								<ui-badge 
 									[data]="{ text: color + ' Status' }"
@@ -106,8 +168,13 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 							}
 						</div>
 					</div>
-					<div class="space-y-4">
-						<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Tech Badges</h3>
+
+					<!-- Tech Badges -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Technology Tags</h3>
+						</div>
 						<div class="flex flex-wrap gap-2">
 							@for (tech of techStack(); track tech) {
 								<ui-badge 
@@ -117,9 +184,14 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 							}
 						</div>
 					</div>
-					<div class="space-y-4">
-						<h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Animated Badges</h3>
-						<div class="space-y-2">
+
+					<!-- Animated Badges -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-yellow-500 rounded-full animate-ping"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Live Updates</h3>
+						</div>
+						<div class="space-y-3">
 							<ui-badge 
 								[data]="{ text: 'Live Status', icon: '🟢' }"
 								[config]="{ variant: 'status', color: 'green', showDot: true, animate: true }">
@@ -128,59 +200,188 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 								[data]="{ text: 'Processing', icon: '⚡' }"
 								[config]="{ variant: 'status', color: 'yellow', showDot: true, animate: true }">
 							</ui-badge>
+							<ui-badge 
+								[data]="{ text: 'Critical Alert', icon: '🚨' }"
+								[config]="{ variant: 'status', color: 'red', showDot: true, animate: true }">
+							</ui-badge>
 						</div>
 					</div>
 				</div>
 			</section>
 
 			<!-- Cards Section -->
-			<section class="space-y-6">
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-					Card Components
-				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			<section id="cards" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">📋</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Card Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Flexible card layouts for showcasing features, content, and information
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					@for (card of sampleCards(); track card.title) {
-						<ui-card 
-							[data]="card"
-							[config]="{ variant: 'feature', hoverable: true }">
-						</ui-card>
+						<div class="transform transition-all duration-300 hover:scale-105">
+							<ui-card 
+								[data]="card"
+								[config]="{ variant: 'feature', hoverable: true }">
+							</ui-card>
+						</div>
 					}
+				</div>
+				
+				<!-- Additional Card Showcase -->
+				<div class="mt-16 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8">
+					<h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-8 text-center">
+						Interactive Card States
+					</h3>
+					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border-l-4 border-blue-500">
+							<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Hover Effects</h4>
+							<p class="text-gray-600 dark:text-gray-400 text-sm">Cards respond to user interaction with smooth animations</p>
+						</div>
+						<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border-l-4 border-green-500">
+							<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Responsive Design</h4>
+							<p class="text-gray-600 dark:text-gray-400 text-sm">Adapts beautifully across all screen sizes</p>
+						</div>
+					</div>
 				</div>
 			</section>
 
 			<!-- Tech Stack Items Section -->
-			<section class="space-y-6">
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-					Tech Stack Items
-				</h2>
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+			<section id="tech-stack" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">⚡</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Tech Stack Items
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Showcase your technology stack with beautiful, informative components
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					@for (item of techStackItems(); track item.name) {
-						<ui-tech-stack-item [data]="item"></ui-tech-stack-item>
+						<div class="transform transition-all duration-300 hover:scale-102">
+							<ui-tech-stack-item [data]="item"></ui-tech-stack-item>
+						</div>
 					}
+				</div>
+				
+				<!-- Tech Stack Overview -->
+				<div class="mt-16 text-center">
+					<div class="inline-flex items-center gap-4 bg-white dark:bg-gray-800 rounded-2xl px-8 py-6 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex -space-x-2">
+							@for (item of techStackItems(); track item.name) {
+								<div class="w-10 h-10 rounded-full bg-gradient-to-r {{ item.gradient }} flex items-center justify-center text-white text-xs font-bold border-2 border-white dark:border-gray-800">
+									{{ item.icon }}
+								</div>
+							}
+						</div>
+						<div class="text-left">
+							<p class="font-semibold text-gray-900 dark:text-gray-100">Modern Stack</p>
+							<p class="text-sm text-gray-600 dark:text-gray-400">Built with cutting-edge technologies</p>
+						</div>
+					</div>
 				</div>
 			</section>
 
 			<!-- Code Windows Section -->
-			<section class="space-y-6">
-				<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-					Code Window Components
-				</h2>
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-					<ui-code-window 
-						[data]="codeExample()"
-						[config]="{ variant: 'code' }">
-					</ui-code-window>
-					<ui-code-window 
-						[data]="terminalExample()"
-						[config]="{ variant: 'terminal' }">
-					</ui-code-window>
+			<section id="code-windows" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">💻</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Code Window Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Elegant code display windows with syntax highlighting and terminal emulation
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<div class="transform transition-all duration-300 hover:scale-102">
+						<ui-code-window 
+							[data]="codeExample()"
+							[config]="{ variant: 'code' }">
+						</ui-code-window>
+					</div>
+					<div class="transform transition-all duration-300 hover:scale-102">
+						<ui-code-window 
+							[data]="terminalExample()"
+							[config]="{ variant: 'terminal' }">
+						</ui-code-window>
+					</div>
+				</div>
+				
+				<!-- Code Features Highlight -->
+				<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+					<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
+						<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+							<span class="text-blue-600 dark:text-blue-400 text-xl">🎨</span>
+						</div>
+						<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Syntax Highlighting</h4>
+						<p class="text-gray-600 dark:text-gray-400 text-sm">Beautiful color-coded syntax for better readability</p>
+					</div>
+					<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
+						<div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+							<span class="text-green-600 dark:text-green-400 text-xl">📱</span>
+						</div>
+						<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Responsive Design</h4>
+						<p class="text-gray-600 dark:text-gray-400 text-sm">Adapts perfectly to any screen size</p>
+					</div>
+					<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
+						<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-4">
+							<span class="text-purple-600 dark:text-purple-400 text-xl">⚡</span>
+						</div>
+						<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Performance</h4>
+						<p class="text-gray-600 dark:text-gray-400 text-sm">Optimized for smooth interactions</p>
+					</div>
 				</div>
 			</section>
+		</div>
+
+		<!-- Footer Section -->
+		<div class="bg-gray-100 dark:bg-gray-800 py-16 px-8 mt-20">
+			<div class="max-w-4xl mx-auto text-center">
+				<h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+					Ready to Build Something Amazing?
+				</h3>
+				<p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+					These components are built with modern Angular patterns, TypeScript strict mode, 
+					and designed for scalability in enterprise applications.
+				</p>
+				<div class="flex flex-wrap justify-center gap-4">
+					<ui-button 
+						[data]="{ text: 'View Documentation', icon: '📚' }"
+						[config]="{ variant: 'primary', size: 'lg' }">
+					</ui-button>
+					<ui-button 
+						[data]="{ text: 'GitHub Repository', icon: '⭐' }"
+						[config]="{ variant: 'secondary', size: 'lg' }">
+					</ui-button>
+				</div>
+			</div>
 		</div>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentShowcaseComponent {
+	navigationSections = signal([
+		{ id: 'buttons', label: '🎯 Buttons' },
+		{ id: 'badges', label: '🏷️ Badges' },
+		{ id: 'cards', label: '📋 Cards' },
+		{ id: 'tech-stack', label: '⚡ Tech Stack' },
+		{ id: 'code-windows', label: '💻 Code Windows' }
+	]);
+
 	badgeColors = signal(['blue', 'green', 'purple', 'red', 'yellow', 'gray'] as const);
 	
 	techStack = signal([
