@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 import { ThemeService } from '@ai-optimized-angular-template/services';
 import { 
 	ThemeToggleComponent,
@@ -51,12 +52,17 @@ import {
 							<ui-button 
 								[data]="{ text: 'Explore Features' }"
 								[config]="{ variant: 'primary', size: 'lg' }"
-								(onClick)="scrollToSection('features')">
+								(click)="scrollToSection('features')">
 							</ui-button>
 							<ui-button 
-								[data]="{ text: 'View Tech Stack' }"
+								[data]="{ text: 'View Components', icon: '🎨' }"
 								[config]="{ variant: 'secondary', size: 'lg' }"
-								(onClick)="scrollToSection('stack')">
+								(click)="navigateToShowcase()">
+							</ui-button>
+							<ui-button 
+								[data]="{ text: 'Tech Stack' }"
+								[config]="{ variant: 'ghost', size: 'lg' }"
+								(click)="scrollToSection('stack')">
 							</ui-button>
 						</div>
 						
@@ -263,6 +269,7 @@ import {
 })
 export class PagesComponent {
 	private document = inject(DOCUMENT);
+	private router = inject(Router);
 	protected themeService = inject(ThemeService);
 
 	features = signal([
@@ -426,5 +433,9 @@ export class PagesComponent {
 				block: 'start'
 			});
 		}
+	}
+
+	navigateToShowcase(): void {
+		this.router.navigate(['/showcase']);
 	}
 }
