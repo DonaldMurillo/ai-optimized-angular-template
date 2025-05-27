@@ -15,6 +15,13 @@ import { LoadingComponent } from '../loading/loading.component';
 import { ProgressComponent } from '../progress/progress.component';
 import { ToastComponent } from '../toast/toast.component';
 import { TooltipComponent } from '../tooltip/tooltip.component';
+import { ModalComponent } from '../modal/modal.component';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { NavbarNavigationItem, NavbarAction, NavbarDropdownItem } from '../navbar/navbar.interfaces';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { BreadcrumbItem, BreadcrumbConfig } from '../breadcrumb/breadcrumb.interfaces';
+import { TabsComponent } from '../tabs/tabs.component';
+import { TabItem, TabsConfig, TabSelectEvent, TabCloseEvent } from '../tabs/tabs.interfaces';
 
 @Component({
 	selector: 'ui-component-showcase',
@@ -35,7 +42,11 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 		LoadingComponent,
 		ProgressComponent,
 		ToastComponent,
-		TooltipComponent
+		TooltipComponent,
+		ModalComponent,
+		NavbarComponent,
+		BreadcrumbComponent,
+		TabsComponent
 	],
 	host: {
 		class: 'block bg-gray-50 dark:bg-gray-900 min-h-screen'
@@ -62,13 +73,13 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 				<!-- Quick Navigation -->
 				<div class="flex flex-wrap justify-center gap-3 mb-8">
 					@for (section of navigationSections(); track section.id) {
-						<a 
-							[href]="'#' + section.id"
+						<button 
+							(click)="scrollToSection(section.id)"
 							class="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg 
 								   shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 
 								   border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600">
 							{{ section.label }}
-						</a>
+						</button>
 					}
 				</div>
 			</div>
@@ -612,6 +623,470 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 				}
 			</section>
 
+			<!-- Layout Components Section -->
+			<section id="layout" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">📱</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Layout Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Essential layout and navigation components for building structured user interfaces
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 gap-8">
+					<!-- Modal Components -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-indigo-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Modal Dialogs</h3>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Different Sizes</h4>
+								<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+									<button 
+										(click)="showModal('sm')"
+										class="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 transition-colors text-sm">
+										Small Modal
+									</button>
+									<button 
+										(click)="showModal('md')"
+										class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-sm">
+										Medium Modal
+									</button>
+									<button 
+										(click)="showModal('lg')"
+										class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition-colors text-sm">
+										Large Modal
+									</button>
+									<button 
+										(click)="showModal('xl')"
+										class="px-4 py-2 bg-teal-500 text-white rounded hover:bg-teal-600 transition-colors text-sm">
+										XL Modal
+									</button>
+								</div>
+							</div>
+							<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Modal Features</h4>
+								<ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+									<li>• Accessible with ARIA attributes and keyboard navigation</li>
+									<li>• Click outside to dismiss or use the close button</li>
+									<li>• Smooth animations with backdrop blur effect</li>
+									<li>• Focus management and body scroll prevention</li>
+									<li>• Dark mode support with proper color schemes</li>
+									<li>• Multiple sizes: Small (384px), Medium (512px), Large (640px), XL (768px)</li>
+								</ul>
+							</div>
+							<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">📑 Tabs Component Examples</h4>
+								
+								<!-- Basic Tabs -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Basic Tabs with Icons and Badges</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+										<ui-tabs 
+											[tabs]="basicTabsItems()"
+											[config]="basicTabsConfig()"
+											(tabSelect)="handleTabSelect($event)"
+											(tabClose)="handleTabClose($event)">
+											
+											<!-- Tab Content Templates -->
+											<div slot="tab-overview" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">📊 Overview Dashboard</h3>
+												<div class="grid grid-cols-2 gap-4">
+													<div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+														<h4 class="font-medium text-blue-700 dark:text-blue-300">Total Users</h4>
+														<p class="text-2xl font-bold text-blue-900 dark:text-blue-100">2,847</p>
+													</div>
+													<div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+														<h4 class="font-medium text-green-700 dark:text-green-300">Revenue</h4>
+														<p class="text-2xl font-bold text-green-900 dark:text-green-100">$45,231</p>
+													</div>
+												</div>
+											</div>
+											
+											<div slot="tab-details" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">📋 Detailed Information</h3>
+												<div class="space-y-4">
+													<div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+														<span class="text-gray-600 dark:text-gray-400">Created</span>
+														<span class="font-medium text-gray-900 dark:text-gray-100">March 15, 2024</span>
+													</div>
+													<div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+														<span class="text-gray-600 dark:text-gray-400">Last Updated</span>
+														<span class="font-medium text-gray-900 dark:text-gray-100">2 hours ago</span>
+													</div>
+													<div class="flex items-center justify-between py-3 border-b border-gray-200 dark:border-gray-700">
+														<span class="text-gray-600 dark:text-gray-400">Status</span>
+														<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+															Active
+														</span>
+													</div>
+												</div>
+											</div>
+											
+											<div slot="tab-settings" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">⚙️ Configuration Settings</h3>
+												<div class="space-y-4">
+													<div class="flex items-center justify-between">
+														<div>
+															<p class="font-medium text-gray-900 dark:text-gray-100">Auto-save</p>
+															<p class="text-sm text-gray-500 dark:text-gray-400">Automatically save changes</p>
+														</div>
+														<input type="checkbox" checked class="h-4 w-4 text-blue-600 rounded border-gray-300">
+													</div>
+													<div class="flex items-center justify-between">
+														<div>
+															<p class="font-medium text-gray-900 dark:text-gray-100">Notifications</p>
+															<p class="text-sm text-gray-500 dark:text-gray-400">Receive email notifications</p>
+														</div>
+														<input type="checkbox" class="h-4 w-4 text-blue-600 rounded border-gray-300">
+													</div>
+												</div>
+											</div>
+										</ui-tabs>
+									</div>
+								</div>
+
+								<!-- Dashboard Style Tabs -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Pills Style with Closable Tabs</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+										<ui-tabs 
+											[tabs]="dashboardTabsItems()"
+											[config]="dashboardTabsConfig()"
+											(tabSelect)="handleTabSelect($event)"
+											(tabClose)="handleTabClose($event)">
+											
+											<div slot="tab-analytics" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">📈 Analytics Overview</h3>
+												<div class="h-32 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg flex items-center justify-center">
+													<p class="text-gray-600 dark:text-gray-400">Chart visualization would go here</p>
+												</div>
+											</div>
+											
+											<div slot="tab-reports" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">📊 Reports Center</h3>
+												<div class="space-y-3">
+													<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+														<span class="font-medium text-gray-900 dark:text-gray-100">Monthly Report</span>
+														<button class="text-blue-600 dark:text-blue-400 hover:underline">Download</button>
+													</div>
+													<div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+														<span class="font-medium text-gray-900 dark:text-gray-100">Weekly Summary</span>
+														<button class="text-blue-600 dark:text-blue-400 hover:underline">View</button>
+													</div>
+												</div>
+											</div>
+											
+											<div slot="tab-users" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">👥 User Management</h3>
+												<p class="text-gray-600 dark:text-gray-400">User management interface would be displayed here.</p>
+											</div>
+											
+											<div slot="tab-api" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">🔌 API Configuration</h3>
+												<p class="text-gray-600 dark:text-gray-400">API settings and configuration options.</p>
+											</div>
+										</ui-tabs>
+									</div>
+								</div>
+
+								<!-- Vertical Tabs -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Vertical Tabs Layout</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden h-80">
+										<ui-tabs 
+											[tabs]="verticalTabsItems()"
+											[config]="verticalTabsConfig()"
+											(tabSelect)="handleTabSelect($event)">
+											
+											<div slot="tab-profile" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">👤 Profile Settings</h3>
+												<p class="text-gray-600 dark:text-gray-400 mb-4">Manage your personal information and preferences.</p>
+												<div class="space-y-4">
+													<div>
+														<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Display Name</label>
+														<input type="text" value="John Doe" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+													</div>
+													<div>
+														<label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Bio</label>
+														<textarea rows="3" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Software developer passionate about creating amazing user experiences.</textarea>
+													</div>
+												</div>
+											</div>
+											
+											<div slot="tab-account" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">🏦 Account Information</h3>
+												<p class="text-gray-600 dark:text-gray-400">View and manage your account details.</p>
+											</div>
+											
+											<div slot="tab-security" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">🔒 Security Settings</h3>
+												<p class="text-gray-600 dark:text-gray-400">Configure your security preferences and two-factor authentication.</p>
+											</div>
+											
+											<div slot="tab-billing" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">💳 Billing & Payments</h3>
+												<p class="text-gray-600 dark:text-gray-400">Manage your subscription and payment methods.</p>
+											</div>
+											
+											<div slot="tab-notifications" class="p-6">
+												<h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">🔔 Notification Preferences</h3>
+												<p class="text-gray-600 dark:text-gray-400">Control how and when you receive notifications.</p>
+											</div>
+										</ui-tabs>
+									</div>
+								</div>
+								
+								<div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
+									<h4 class="text-sm font-medium text-green-700 dark:text-green-300 mb-2">✅ Tabs Features</h4>
+									<ul class="text-sm text-green-600 dark:text-green-400 space-y-1">
+										<li>• Multiple style variants: default, pills, underline, bordered, minimal</li>
+										<li>• Horizontal and vertical orientations with responsive design</li>
+										<li>• Icon and badge support for enhanced visual communication</li>
+										<li>• Closable tabs with customizable close buttons</li>
+										<li>• Disabled tabs and lazy loading support</li>
+										<li>• Keyboard navigation with arrow keys and shortcuts</li>
+										<li>• Smooth animations and transitions</li>
+										<li>• Dark mode support with automatic theming</li>
+										<li>• Accessibility with ARIA roles and proper focus management</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Navbar Components -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-emerald-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Navigation Bars</h3>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Responsive Navbar Examples</h4>
+								
+								<!-- Basic Navbar -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Basic Navigation with User Profile</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+										<ui-navbar 
+											[data]="{
+												brand: { text: 'MyApp', icon: '🚀', href: '/' },
+												navigation: [
+													{ label: 'Home', href: '/', active: true },
+													{ label: 'About', href: '/about' },
+													{ label: 'Services', href: '/services' },
+													{ label: 'Contact', href: '/contact' }
+												],
+												user: {
+													name: 'John Doe',
+													email: 'john@example.com',
+													avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face',
+													status: 'online'
+												}
+											}"
+											[config]="{ size: 'md', variant: 'default', position: 'static' }"
+											(onNavigate)="handleNavigation($event)"
+											(onUserAction)="handleUserAction($event)">
+										</ui-navbar>
+									</div>
+								</div>
+
+								<!-- E-commerce Navbar -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">E-commerce with Search & Actions</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+										<ui-navbar 
+											[data]="{
+												brand: { text: 'ShopLogo', icon: '🛍️' },
+												navigation: [
+													{ 
+														label: 'Categories', 
+														children: [
+															{ label: 'Electronics', href: '/electronics', icon: '📱' },
+															{ label: 'Clothing', href: '/clothing', icon: '👕' },
+															{ label: 'Home & Garden', href: '/home', icon: '🏠' },
+															{ label: 'Sports', href: '/sports', icon: '⚽' }
+														]
+													},
+													{ label: 'Deals', href: '/deals', badge: { text: 'Hot', color: 'red' } },
+													{ label: 'New Arrivals', href: '/new' }
+												],
+												search: { placeholder: 'Search products...', value: '' },
+												actions: [
+													{ type: 'button', label: 'Cart', icon: '🛒', variant: 'secondary', badge: { text: '3', color: 'blue' } },
+													{ type: 'button', label: 'Wishlist', icon: '❤️', variant: 'secondary' }
+												],
+												user: {
+													name: 'Sarah Smith',
+													initials: 'SS',
+													status: 'online'
+												}
+											}"
+											[config]="{ size: 'md', variant: 'default', position: 'static' }"
+											(onNavigate)="handleNavigation($event)"
+											(onAction)="handleAction($event)"
+											(onUserAction)="handleUserAction($event)"
+											(onSearch)="handleSearch($event)">
+										</ui-navbar>
+									</div>
+								</div>
+
+								<!-- Dashboard Navbar -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Dashboard with Notifications</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+										<ui-navbar 
+											[data]="{
+												brand: { text: 'Dashboard', icon: '📊' },
+												navigation: [
+													{ label: 'Overview', href: '/dashboard', active: true, icon: '📈' },
+													{ label: 'Analytics', href: '/analytics', icon: '📊' },
+													{ 
+														label: 'Management',
+														icon: '⚙️',
+														children: [
+															{ label: 'Users', href: '/users', icon: '👥' },
+															{ label: 'Settings', href: '/settings', icon: '⚙️' },
+															{ label: 'Reports', href: '/reports', icon: '📋' }
+														]
+													}
+												],
+												actions: [
+													{ 
+														type: 'dropdown', 
+														label: 'Notifications', 
+														icon: '🔔',
+														badge: { text: '5', color: 'red' },
+														items: [
+															{ label: 'New message from admin', icon: '💬', href: '/notifications/1' },
+															{ label: 'System update available', icon: '🔄', href: '/notifications/2' },
+															{ divider: true },
+															{ label: 'View all notifications', href: '/notifications' }
+														]
+													}
+												],
+												user: {
+													name: 'Admin User',
+													email: 'admin@company.com',
+													initials: 'AU',
+													status: 'busy'
+												}
+											}"
+											[config]="{ size: 'md', variant: 'default', position: 'static' }"
+											(onNavigate)="handleNavigation($event)"
+											(onAction)="handleAction($event)"
+											(onUserAction)="handleUserAction($event)">
+										</ui-navbar>
+									</div>
+								</div>
+							</div>
+							
+							<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Navbar Features</h4>
+								<ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+									<li>• Fully responsive with mobile-first design</li>
+									<li>• Collapsible mobile menu with smooth animations</li>
+									<li>• Dropdown navigation with nested menu support</li>
+									<li>• Integrated search functionality</li>
+									<li>• User profile dropdown with status indicators</li>
+									<li>• Action buttons and notification badges</li>
+									<li>• Dark mode support with automatic color switching</li>
+									<li>• Accessibility with ARIA labels and keyboard navigation</li>
+									<li>• Multiple variants: default, transparent, blur effects</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<!-- Breadcrumb Components -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-amber-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Breadcrumb Navigation</h3>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Navigation Hierarchy Examples</h4>
+								
+								<!-- Basic Breadcrumb -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Basic Navigation Path with Icons</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+										<ui-breadcrumb 
+											[config]="basicBreadcrumbConfig()"
+											[items]="basicBreadcrumbItems()"
+											(itemClick)="handleBreadcrumbClick($event)"
+											(overflowToggle)="handleBreadcrumbOverflow($event)">
+										</ui-breadcrumb>
+									</div>
+								</div>
+
+								<!-- E-commerce Breadcrumb with Overflow -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">E-commerce Path with Overflow Handling</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+										<ui-breadcrumb 
+											[config]="ecommerceBreadcrumbConfig()"
+											[items]="ecommerceBreadcrumbItems()"
+											(itemClick)="handleBreadcrumbClick($event)"
+											(overflowToggle)="handleBreadcrumbOverflow($event)">
+										</ui-breadcrumb>
+									</div>
+								</div>
+
+								<!-- Dashboard Breadcrumb -->
+								<div class="mb-6">
+									<p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Dashboard Navigation with Simple Style</p>
+									<div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+										<ui-breadcrumb 
+											[config]="dashboardBreadcrumbConfig()"
+											[items]="dashboardBreadcrumbItems()"
+											(itemClick)="handleBreadcrumbClick($event)"
+											(overflowToggle)="handleBreadcrumbOverflow($event)">
+										</ui-breadcrumb>
+									</div>
+								</div>
+							</div>
+							
+							<div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Breadcrumb Features</h4>
+								<ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+									<li>• Hierarchical navigation with customizable separators</li>
+									<li>• Overflow handling for long navigation paths</li>
+									<li>• Icon support for visual clarity</li>
+									<li>• Multiple style variants: default, simple, pills, minimal</li>
+									<li>• Home icon support for first navigation item</li>
+									<li>• Responsive design with mobile optimization</li>
+									<li>• Dark mode support with automatic theming</li>
+									<li>• Accessibility with semantic navigation and ARIA labels</li>
+									<li>• Keyboard navigation support</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal Container -->
+				@if (showingModal()) {
+					<ui-modal 
+						[isOpen]="showingModal()"
+						[title]="modalData().title || ''"
+						[content]="modalData().content"
+						[size]="modalData().size"
+						[closable]="true"
+						[closeOnBackdrop]="true"
+						(onClose)="hideModal()">
+					</ui-modal>
+				}
+			</section>
+
 			<!-- Tech Stack Items Section -->
 			<section id="tech-stack" class="scroll-mt-24">
 				<div class="text-center mb-12">
@@ -760,12 +1235,187 @@ export class ComponentShowcaseComponent {
 		variant: 'info'
 	});
 
+	// Modal state management
+	showingModal = signal(false);
+	modalData = signal<{
+		title?: string;
+		content: string;
+		size: 'sm' | 'md' | 'lg' | 'xl';
+	}>({
+		title: 'Sample Modal',
+		content: 'This is a demonstration of the modal component with various features.',
+		size: 'md'
+	});
+
+	// Breadcrumb data
+	basicBreadcrumbItems = signal<BreadcrumbItem[]>([
+		{ label: 'Home', url: '/', icon: 'fas fa-home' },
+		{ label: 'Products', url: '/products' },
+		{ label: 'Electronics', url: '/products/electronics' },
+		{ label: 'Laptops' }
+	]);
+
+	basicBreadcrumbConfig = signal<BreadcrumbConfig>({
+		separator: 'chevron',
+		size: 'md',
+		variant: 'default',
+		showIcons: true
+	});
+
+	ecommerceBreadcrumbItems = signal<BreadcrumbItem[]>([
+		{ label: 'Store', url: '/' },
+		{ label: 'Categories', url: '/categories' },
+		{ label: 'Electronics', url: '/categories/electronics' },
+		{ label: 'Computers', url: '/categories/electronics/computers' },
+		{ label: 'Gaming Laptops', url: '/categories/electronics/computers/gaming' },
+		{ label: 'ASUS ROG Strix G15' }
+	]);
+
+	ecommerceBreadcrumbConfig = signal<BreadcrumbConfig>({
+		separator: 'arrow',
+		maxItems: 3,
+		size: 'md',
+		variant: 'pills',
+		showHomeIcon: true
+	});
+
+	dashboardBreadcrumbItems = signal<BreadcrumbItem[]>([
+		{ label: 'Dashboard', url: '/dashboard', icon: 'fas fa-tachometer-alt' },
+		{ label: 'User Management', url: '/dashboard/users', icon: 'fas fa-users' },
+		{ label: 'Role Permissions', url: '/dashboard/users/roles', icon: 'fas fa-shield-alt' },
+		{ label: 'Edit Role: Admin' }
+	]);
+
+	dashboardBreadcrumbConfig = signal<BreadcrumbConfig>({
+		separator: 'slash',
+		size: 'md',
+		variant: 'simple',
+		showIcons: true
+	});
+
+	// Tabs data
+	basicTabsItems = signal<TabItem[]>([
+		{
+			id: 'overview',
+			label: 'Overview',
+			icon: '📊',
+			content: undefined // Will be set as template
+		},
+		{
+			id: 'details',
+			label: 'Details',
+			icon: '📋',
+			badge: '2',
+			content: undefined
+		},
+		{
+			id: 'settings',
+			label: 'Settings',
+			icon: '⚙️',
+			content: undefined
+		},
+		{
+			id: 'help',
+			label: 'Help',
+			icon: '❓',
+			disabled: true,
+			content: undefined
+		}
+	]);
+
+	basicTabsConfig = signal<TabsConfig>({
+		variant: 'default',
+		size: 'md',
+		orientation: 'horizontal',
+		animated: true,
+		keyboardNavigation: true
+	});
+
+	dashboardTabsItems = signal<TabItem[]>([
+		{
+			id: 'analytics',
+			label: 'Analytics',
+			icon: '📈',
+			content: undefined
+		},
+		{
+			id: 'reports',
+			label: 'Reports',
+			icon: '📊',
+			badge: 'New',
+			content: undefined
+		},
+		{
+			id: 'users',
+			label: 'Users',
+			icon: '👥',
+			content: undefined
+		},
+		{
+			id: 'api',
+			label: 'API',
+			icon: '🔌',
+			closable: true,
+			content: undefined
+		}
+	]);
+
+	dashboardTabsConfig = signal<TabsConfig>({
+		variant: 'pills',
+		size: 'md',
+		orientation: 'horizontal',
+		fullWidth: true,
+		showCloseButtons: true
+	});
+
+	verticalTabsItems = signal<TabItem[]>([
+		{
+			id: 'profile',
+			label: 'Profile',
+			icon: '👤',
+			content: undefined
+		},
+		{
+			id: 'account',
+			label: 'Account',
+			icon: '🏦',
+			content: undefined
+		},
+		{
+			id: 'security',
+			label: 'Security',
+			icon: '🔒',
+			badge: '!',
+			content: undefined
+		},
+		{
+			id: 'billing',
+			label: 'Billing',
+			icon: '💳',
+			content: undefined
+		},
+		{
+			id: 'notifications',
+			label: 'Notifications',
+			icon: '🔔',
+			content: undefined
+		}
+	]);
+
+	verticalTabsConfig = signal<TabsConfig>({
+		variant: 'underline',
+		size: 'md',
+		orientation: 'vertical',
+		position: 'left'
+	});
+	
 	navigationSections = signal([
 		{ id: 'buttons', label: '🎯 Buttons' },
 		{ id: 'badges', label: '🏷️ Badges' },
 		{ id: 'cards', label: '📋 Cards' },
 		{ id: 'forms', label: '📝 Forms' },
 		{ id: 'feedback', label: '💬 Feedback' },
+		{ id: 'layout', label: '📱 Layout' },
 		{ id: 'tech-stack', label: '⚡ Tech Stack' },
 		{ id: 'code-windows', label: '💻 Code Windows' }
 	]);
@@ -903,5 +1553,83 @@ export class ComponentShowcaseComponent {
 
 	hideToast(): void {
 		this.showingToast.set(false);
+	}
+
+	// Modal component methods
+	showModal(size: 'sm' | 'md' | 'lg' | 'xl' = 'md'): void {
+		const modalContent = {
+			sm: {
+				title: 'Small Modal',
+				content: 'This is a small modal dialog for simple confirmations or brief messages.'
+			},
+			md: {
+				title: 'Medium Modal',
+				content: 'This is a medium-sized modal dialog that provides more space for content and actions. Perfect for forms or detailed information.'
+			},
+			lg: {
+				title: 'Large Modal',
+				content: 'This is a large modal dialog with plenty of space for complex content, multiple sections, or extensive forms. It maintains good readability while maximizing available screen space.'
+			},
+			xl: {
+				title: 'Extra Large Modal',
+				content: 'This is an extra large modal dialog designed for comprehensive content, detailed dashboards, or complex interfaces that need maximum screen real estate while still maintaining the modal context.'
+			}
+		};
+
+		this.modalData.set({
+			...modalContent[size],
+			size
+		});
+		this.showingModal.set(true);
+	}
+
+	hideModal(): void {
+		this.showingModal.set(false);
+	}
+
+	// Navigation method for smooth scrolling
+	scrollToSection(sectionId: string): void {
+		const element = document.getElementById(sectionId);
+		if (element) {
+			element.scrollIntoView({ 
+				behavior: 'smooth', 
+				block: 'start' 
+			});
+		}
+	}
+
+	// Navbar event handlers
+	handleNavigation(item: NavbarNavigationItem): void {
+		console.log('Navigation clicked:', item);
+	}
+
+	handleAction(action: NavbarAction): void {
+		console.log('Action clicked:', action);
+	}
+
+	handleUserAction(item: NavbarDropdownItem): void {
+		console.log('User action clicked:', item);
+	}
+
+	handleSearch(query: string): void {
+		console.log('Search query:', query);
+	}
+
+	// Breadcrumb event handlers
+	handleBreadcrumbClick(item: BreadcrumbItem): void {
+		console.log('Breadcrumb clicked:', item);
+	}
+
+	handleBreadcrumbOverflow(isOpen: boolean): void {
+		console.log('Breadcrumb overflow toggled:', isOpen);
+	}
+
+	// Tabs event handlers
+	handleTabSelect(event: TabSelectEvent): void {
+		console.log('Tab selected:', event);
+	}
+
+	handleTabClose(event: TabCloseEvent): void {
+		console.log('Tab closed:', event);
 	}
 }

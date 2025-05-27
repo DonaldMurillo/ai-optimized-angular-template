@@ -21,5 +21,13 @@ export * from './lib/progress/progress.component';
 export * from './lib/toast/toast.component';
 export * from './lib/tooltip/tooltip.component';
 
+// Layout & Navigation Components
+export * from './lib/modal/modal.component';
+export * from './lib/navbar/navbar.component';
+export * from './lib/breadcrumb/breadcrumb.component';
+export * from './lib/breadcrumb/breadcrumb.interfaces';
+export * from './lib/tabs/tabs.component';
+export * from './lib/tabs/tabs.interfaces';
+
 // Component Showcase
 export * from './lib/component-showcase/component-showcase.component';
