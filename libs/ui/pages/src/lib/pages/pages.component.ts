@@ -1,11 +1,25 @@
 import { ChangeDetectionStrategy, Component, signal, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ThemeService } from '@ai-optimized-angular-template/services';
-import { ThemeToggleComponent } from '@ai-optimized-angular-template/components';
+import { 
+	ThemeToggleComponent,
+	ButtonComponent,
+	CardComponent,
+	CodeWindowComponent,
+	BadgeComponent,
+	TechStackItemComponent
+} from '@ai-optimized-angular-template/components';
 
 @Component({
 	selector: 'lib-pages',
-	imports: [ThemeToggleComponent],
+	imports: [
+		ThemeToggleComponent,
+		ButtonComponent,
+		CardComponent,
+		CodeWindowComponent,
+		BadgeComponent,
+		TechStackItemComponent
+	],
 	template: `
 		<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
 			<!-- Theme Toggle - Fixed Position -->
@@ -18,10 +32,11 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 				<div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 dark:from-blue-400/5 dark:to-purple-400/5"></div>
 				<div class="relative container mx-auto px-6 py-16 md:py-24">
 					<div class="text-center max-w-4xl mx-auto">
-						<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm font-medium mb-6 animate-fade-in">
-							<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-							Production Ready Template
-						</div>
+						<ui-badge 
+							[data]="{ text: 'Production Ready Template' }"
+							[config]="{ variant: 'status', color: 'blue', showDot: true, animate: true }"
+							class="mb-6 animate-fade-in">
+						</ui-badge>
 						
 						<h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-slate-900 via-blue-800 to-purple-800 dark:from-slate-100 dark:via-blue-200 dark:to-purple-200 bg-clip-text text-transparent mb-6 animate-fade-in">
 							AI-Optimized Angular Template
@@ -33,31 +48,34 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 						</p>
 						
 						<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 animate-fade-in">
-							<button 
-								(click)="scrollToSection('features')"
-								class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 ease-out">
-								Explore Features
-							</button>
-							<button 
-								(click)="scrollToSection('stack')"
-								class="px-8 py-4 border-2 border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:border-blue-500 dark:hover:border-blue-400 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200">
-								View Tech Stack
-							</button>
+							<ui-button 
+								[data]="{ text: 'Explore Features' }"
+								[config]="{ variant: 'primary', size: 'lg' }"
+								(onClick)="scrollToSection('features')">
+							</ui-button>
+							<ui-button 
+								[data]="{ text: 'View Tech Stack' }"
+								[config]="{ variant: 'secondary', size: 'lg' }"
+								(onClick)="scrollToSection('stack')">
+							</ui-button>
 						</div>
 						
 						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto text-sm text-slate-600 dark:text-slate-400 animate-fade-in">
-							<div class="flex items-center justify-center gap-2">
-								<span class="w-2 h-2 bg-green-500 rounded-full"></span>
-								TypeScript Strict Mode
-							</div>
-							<div class="flex items-center justify-center gap-2">
-								<span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-								Modern Angular Signals
-							</div>
-							<div class="flex items-center justify-center gap-2">
-								<span class="w-2 h-2 bg-purple-500 rounded-full"></span>
-								AI-Enhanced Development
-							</div>
+							<ui-badge 
+								[data]="{ text: 'TypeScript Strict Mode' }"
+								[config]="{ variant: 'feature', color: 'green', showDot: true }"
+								class="justify-center">
+							</ui-badge>
+							<ui-badge 
+								[data]="{ text: 'Modern Angular Signals' }"
+								[config]="{ variant: 'feature', color: 'blue', showDot: true }"
+								class="justify-center">
+							</ui-badge>
+							<ui-badge 
+								[data]="{ text: 'AI-Enhanced Development' }"
+								[config]="{ variant: 'feature', color: 'purple', showDot: true }"
+								class="justify-center">
+							</ui-badge>
 						</div>
 					</div>
 				</div>
@@ -77,13 +95,15 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 
 					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 						@for (feature of features(); track feature.title) {
-							<div class="group p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border border-slate-200 dark:border-slate-700">
-								<div class="w-12 h-12 bg-gradient-to-br {{ feature.gradient }} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
-									<span class="text-2xl">{{ feature.icon }}</span>
-								</div>
-								<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100 mb-2">{{ feature.title }}</h3>
-								<p class="text-slate-600 dark:text-slate-300 leading-relaxed">{{ feature.description }}</p>
-							</div>
+							<ui-card 
+								[data]="{ 
+									icon: feature.icon, 
+									title: feature.title, 
+									description: feature.description,
+									gradient: feature.gradient
+								}"
+								[config]="{ variant: 'feature', hoverable: true }">
+							</ui-card>
 						}
 					</div>
 				</div>
@@ -109,15 +129,14 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 								Frontend Stack
 							</h3>
 							@for (tech of frontendStack(); track tech.name) {
-								<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow duration-200">
-									<div class="w-10 h-10 bg-gradient-to-br {{ tech.gradient }} rounded-lg flex items-center justify-center text-white font-bold">
-										{{ tech.icon }}
-									</div>
-									<div>
-										<h4 class="font-semibold text-slate-900 dark:text-slate-100">{{ tech.name }}</h4>
-										<p class="text-sm text-slate-600 dark:text-slate-400">{{ tech.description }}</p>
-									</div>
-								</div>
+								<ui-tech-stack-item 
+									[data]="{ 
+										name: tech.name, 
+										description: tech.description,
+										icon: tech.icon,
+										gradient: tech.gradient
+									}">
+								</ui-tech-stack-item>
 							}
 						</div>
 
@@ -128,15 +147,14 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 								Backend Stack
 							</h3>
 							@for (tech of backendStack(); track tech.name) {
-								<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md transition-shadow duration-200">
-									<div class="w-10 h-10 bg-gradient-to-br {{ tech.gradient }} rounded-lg flex items-center justify-center text-white font-bold">
-										{{ tech.icon }}
-									</div>
-									<div>
-										<h4 class="font-semibold text-slate-900 dark:text-slate-100">{{ tech.name }}</h4>
-										<p class="text-sm text-slate-600 dark:text-slate-400">{{ tech.description }}</p>
-									</div>
-								</div>
+								<ui-tech-stack-item 
+									[data]="{ 
+										name: tech.name, 
+										description: tech.description,
+										icon: tech.icon,
+										gradient: tech.gradient
+									}">
+								</ui-tech-stack-item>
 							}
 						</div>
 					</div>
@@ -171,24 +189,10 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 						</div>
 
 						<div class="relative">
-							<div class="bg-slate-900 dark:bg-slate-800 rounded-xl p-6 border border-slate-700 shadow-2xl">
-								<div class="flex items-center gap-2 mb-4">
-									<div class="w-3 h-3 bg-red-500 rounded-full"></div>
-									<div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-									<div class="w-3 h-3 bg-green-500 rounded-full"></div>
-									<span class="text-slate-400 text-sm ml-2">AI Assistant Ready</span>
-								</div>
-								<div class="space-y-2 text-sm font-mono">
-									<div class="text-green-400">// ✨ AI can understand this structure instantly</div>
-									<div class="text-blue-400">const userSignal = signal&lt;User | null&gt;(null);</div>
-									<div class="text-purple-400">const isLoading = computed(() => !userSignal());</div>
-									<div class="text-slate-300"></div>
-									<div class="text-green-400">// 🎯 Type-safe, modern patterns</div>
-									<div class="text-yellow-400">&#64;if (userSignal(); as user) &#123;</div>
-									<div class="text-slate-300 ml-4">Welcome back, user.name!</div>
-									<div class="text-yellow-400">&#125;</div>
-								</div>
-							</div>
+							<ui-code-window 
+								[data]="aiCodeExample()"
+								[config]="{ variant: 'code' }">
+							</ui-code-window>
 						</div>
 					</div>
 				</div>
@@ -207,36 +211,23 @@ import { ThemeToggleComponent } from '@ai-optimized-angular-template/components'
 					</div>
 
 					<div class="max-w-4xl mx-auto">
-						<div class="bg-slate-800 rounded-xl p-6 mb-8 border border-slate-700">
-							<div class="flex items-center gap-2 mb-4">
-								<div class="w-3 h-3 bg-red-500 rounded-full"></div>
-								<div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
-								<div class="w-3 h-3 bg-green-500 rounded-full"></div>
-								<span class="text-slate-400 text-sm ml-2">Terminal</span>
-							</div>
-							<div class="space-y-2 text-sm font-mono">
-								<div class="text-green-400"># Clone and setup</div>
-								<div class="text-slate-300">git clone &lt;your-repo&gt;</div>
-								<div class="text-slate-300">cd ai-optimized-angular-template</div>
-								<div class="text-slate-300">npm install</div>
-								<div class="text-slate-300"></div>
-								<div class="text-green-400"># Start development</div>
-								<div class="text-slate-300">npx nx serve ui  <span class="text-slate-500"># Frontend on :4200</span></div>
-								<div class="text-slate-300">npx nx serve api <span class="text-slate-500"># Backend on :3000</span></div>
-							</div>
-						</div>
+						<ui-code-window 
+							[data]="terminalExample()"
+							[config]="{ variant: 'terminal' }"
+							class="mb-8">
+						</ui-code-window>
 
 						<div class="text-center">
 							<p class="text-slate-400 mb-6">
 								Built with ❤️ for the AI-enhanced development era
 							</p>
 							<div class="flex flex-wrap justify-center gap-4 text-sm">
-								<span class="px-3 py-1 bg-slate-800 rounded-full border border-slate-700">Angular 18+</span>
-								<span class="px-3 py-1 bg-slate-800 rounded-full border border-slate-700">NestJS</span>
-								<span class="px-3 py-1 bg-slate-800 rounded-full border border-slate-700">Nx Monorepo</span>
-								<span class="px-3 py-1 bg-slate-800 rounded-full border border-slate-700">Tailwind CSS</span>
-								<span class="px-3 py-1 bg-slate-800 rounded-full border border-slate-700">Prisma ORM</span>
-								<span class="px-3 py-1 bg-slate-800 rounded-full border border-slate-700">TypeScript</span>
+								@for (tech of techBadges(); track tech) {
+									<ui-badge 
+										[data]="{ text: tech }"
+										[config]="{ variant: 'tech', color: 'gray' }">
+									</ui-badge>
+								}
 							</div>
 						</div>
 					</div>
@@ -388,6 +379,43 @@ export class PagesComponent {
 			title: 'Smart Defaults',
 			description: 'Pre-configured settings and examples that serve as perfect starting points for AI-generated code.'
 		}
+	]);
+
+	aiCodeExample = signal({
+		title: 'AI Assistant Ready',
+		lines: [
+			{ type: 'comment' as const, content: '// ✨ AI can understand this structure instantly' },
+			{ type: 'keyword' as const, content: 'const userSignal = signal<User | null>(null);' },
+			{ type: 'variable' as const, content: 'const isLoading = computed(() => !userSignal());' },
+			{ type: 'normal' as const, content: '' },
+			{ type: 'comment' as const, content: '// 🎯 Type-safe, modern patterns' },
+			{ type: 'string' as const, content: '@if (userSignal(); as user) {' },
+			{ type: 'normal' as const, content: 'Welcome back, user.name!', indent: 1 },
+			{ type: 'string' as const, content: '}' }
+		]
+	});
+
+	terminalExample = signal({
+		title: 'Terminal',
+		lines: [
+			{ type: 'comment' as const, content: '# Clone and setup' },
+			{ type: 'normal' as const, content: 'git clone <your-repo>' },
+			{ type: 'normal' as const, content: 'cd ai-optimized-angular-template' },
+			{ type: 'normal' as const, content: 'npm install' },
+			{ type: 'normal' as const, content: '' },
+			{ type: 'comment' as const, content: '# Start development' },
+			{ type: 'normal' as const, content: 'npx nx serve ui  # Frontend on :4200' },
+			{ type: 'normal' as const, content: 'npx nx serve api # Backend on :3000' }
+		]
+	});
+
+	techBadges = signal([
+		'Angular 18+',
+		'NestJS',
+		'Nx Monorepo',
+		'Tailwind CSS',
+		'Prisma ORM',
+		'TypeScript'
 	]);
 
 	scrollToSection(sectionId: string): void {
