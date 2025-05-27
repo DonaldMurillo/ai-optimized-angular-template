@@ -99,6 +99,159 @@ Specialized component for displaying technology stack items with icons and descr
 **Props:**
 - `data`: `{ name: string, description: string, icon: string, gradient: string }`
 
+### 🔤 Input Component (`ui-input`)
+
+Versatile input component supporting multiple types and validation states.
+
+**Usage:**
+```typescript
+<ui-input 
+  [data]="{ 
+    label: 'Email', 
+    placeholder: 'Enter email', 
+    icon: '📧',
+    helperText: 'We will never share your email'
+  }"
+  [config]="{ 
+    type: 'email', 
+    size: 'md', 
+    state: 'default',
+    iconPosition: 'prefix'
+  }"
+  (onInput)="handleInput($event)">
+</ui-input>
+```
+
+**Props:**
+- `data`: `{ value?: string | number, placeholder?: string, label?: string, helperText?: string, icon?: string, id?: string }`
+- `config`: `{ type?: 'text' | 'email' | 'password' | 'number' | 'search' | 'tel' | 'url', size?: 'sm' | 'md' | 'lg', state?: 'default' | 'success' | 'warning' | 'error', disabled?: boolean, readonly?: boolean, required?: boolean, iconPosition?: 'prefix' | 'suffix' }`
+
+### 📝 Textarea Component (`ui-textarea`)
+
+Multi-line text input with auto-resize and character counting.
+
+**Usage:**
+```typescript
+<ui-textarea 
+  [data]="{ 
+    label: 'Description', 
+    placeholder: 'Enter description...', 
+    maxLength: 500 
+  }"
+  [config]="{ 
+    rows: 4, 
+    autoResize: true, 
+    state: 'default' 
+  }"
+  (onInput)="handleInput($event)">
+</ui-textarea>
+```
+
+**Props:**
+- `data`: `{ value?: string, placeholder?: string, label?: string, helperText?: string, id?: string, maxLength?: number }`
+- `config`: `{ rows?: number, maxRows?: number, autoResize?: boolean, resize?: 'none' | 'vertical' | 'horizontal' | 'both', state?: 'default' | 'success' | 'warning' | 'error', disabled?: boolean, readonly?: boolean, required?: boolean }`
+
+### ☑️ Checkbox Component (`ui-checkbox`)
+
+Flexible checkbox component with labels and descriptions.
+
+**Usage:**
+```typescript
+<ui-checkbox 
+  [data]="{ 
+    label: 'Accept Terms', 
+    description: 'I agree to the terms and conditions',
+    checked: false 
+  }"
+  [config]="{ 
+    size: 'md', 
+    labelPosition: 'right' 
+  }"
+  (onChange)="handleChange($event)">
+</ui-checkbox>
+```
+
+**Props:**
+- `data`: `{ checked?: boolean, value?: string | number, label?: string, description?: string, id?: string }`
+- `config`: `{ size?: 'sm' | 'md' | 'lg', disabled?: boolean, indeterminate?: boolean, labelPosition?: 'left' | 'right' }`
+
+### 🔘 Radio Component (`ui-radio`)
+
+Radio button groups with horizontal and vertical layouts.
+
+**Usage:**
+```typescript
+<ui-radio 
+  [data]="{
+    label: 'Plan Selection',
+    options: [
+      { value: 'basic', label: 'Basic', description: 'Perfect for individuals' },
+      { value: 'pro', label: 'Pro', description: 'Great for teams' }
+    ],
+    value: 'basic'
+  }"
+  [config]="{ orientation: 'vertical', size: 'md' }"
+  (onChange)="handleChange($event)">
+</ui-radio>
+```
+
+**Props:**
+- `data`: `{ options: RadioOption[], value?: string | number, label?: string }`
+- `config`: `{ orientation?: 'horizontal' | 'vertical', size?: 'sm' | 'md' | 'lg', disabled?: boolean, name?: string }`
+
+### 🔄 Toggle Component (`ui-toggle`)
+
+Switch/toggle button with customizable colors and positions.
+
+**Usage:**
+```typescript
+<ui-toggle 
+  [data]="{ 
+    label: 'Dark Mode', 
+    description: 'Switch between themes',
+    checked: false 
+  }"
+  [config]="{ 
+    size: 'md', 
+    color: 'blue', 
+    labelPosition: 'right' 
+  }"
+  (onChange)="handleToggle($event)">
+</ui-toggle>
+```
+
+**Props:**
+- `data`: `{ checked?: boolean, label?: string, description?: string, id?: string }`
+- `config`: `{ size?: 'sm' | 'md' | 'lg', disabled?: boolean, labelPosition?: 'left' | 'right', color?: 'blue' | 'green' | 'purple' | 'red' | 'yellow' }`
+
+### 📍 Select Component (`ui-select`)
+
+Dropdown select with search functionality and multiple selection support.
+
+**Usage:**
+```typescript
+<ui-select 
+  [data]="{
+    label: 'Country',
+    placeholder: 'Select country',
+    options: [
+      { value: 'us', label: 'United States' },
+      { value: 'ca', label: 'Canada' }
+    ]
+  }"
+  [config]="{ 
+    searchable: true, 
+    multiple: false, 
+    size: 'md' 
+  }"
+  (onChange)="handleChange($event)">
+</ui-select>
+```
+
+**Props:**
+- `data`: `{ options: SelectOption[], value?: string | number | (string | number)[], placeholder?: string, label?: string, helperText?: string, id?: string }`
+- `config`: `{ size?: 'sm' | 'md' | 'lg', state?: 'default' | 'success' | 'warning' | 'error', disabled?: boolean, required?: boolean, multiple?: boolean, searchable?: boolean }`
+
 ## Design Principles
 
 ### 🎯 Modern Angular Patterns
@@ -130,11 +283,17 @@ import {
   CardComponent,
   BadgeComponent,
   CodeWindowComponent,
-  TechStackItemComponent
+  TechStackItemComponent,
+  InputComponent,
+  TextareaComponent,
+  CheckboxComponent,
+  RadioComponent,
+  ToggleComponent,
+  SelectComponent
 } from '@ai-optimized-angular-template/components';
 
 @Component({
-  imports: [ButtonComponent, CardComponent, BadgeComponent],
+  imports: [ButtonComponent, CardComponent, BadgeComponent, InputComponent],
   // ...
 })
 ```

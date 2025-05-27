@@ -10,6 +10,7 @@ applyTo: '**/*.ts'
 ## Never
 
 - Use the document or window object directly in angular. use the `DOCUMENT` injection token instead.
+- LEave files with errors in the codebase. If you see an error, fix it.
 
 ## Components:
 

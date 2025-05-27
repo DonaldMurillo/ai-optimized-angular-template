@@ -4,6 +4,12 @@ import { ButtonComponent } from '../button/button.component';
 import { CardComponent } from '../card/card.component';
 import { CodeWindowComponent } from '../code-window/code-window.component';
 import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.component';
+import { InputComponent } from '../input/input.component';
+import { TextareaComponent } from '../textarea/textarea.component';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
+import { RadioComponent } from '../radio/radio.component';
+import { ToggleComponent } from '../toggle/toggle.component';
+import { SelectComponent } from '../select/select.component';
 
 @Component({
 	selector: 'ui-component-showcase',
@@ -13,7 +19,13 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 		CardComponent,
 		CodeWindowComponent,
 		BadgeComponent,
-		TechStackItemComponent
+		TechStackItemComponent,
+		InputComponent,
+		TextareaComponent,
+		CheckboxComponent,
+		RadioComponent,
+		ToggleComponent,
+		SelectComponent
 	],
 	host: {
 		class: 'block bg-gray-50 dark:bg-gray-900 min-h-screen'
@@ -270,6 +282,142 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 				</div>
 			</section>
 
+			<!-- Forms Section -->
+			<section id="forms" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">📝</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Form Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						Comprehensive form inputs with validation states and modern styling
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<!-- Input Components -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Text Inputs</h3>
+						</div>
+						<div class="space-y-6">
+							<ui-input 
+								[data]="{ label: 'Email Address', placeholder: 'Enter your email', value: inputValue(), icon: '📧' }"
+								[config]="{ type: 'email', size: 'md', iconPosition: 'prefix' }"
+								(onInput)="onInputChange($event)">
+							</ui-input>
+							<ui-input 
+								[data]="{ label: 'Password', placeholder: 'Enter password', helperText: 'Must be at least 8 characters' }"
+								[config]="{ type: 'password', size: 'md', state: 'default' }">
+							</ui-input>
+							<ui-input 
+								[data]="{ label: 'Success State', value: 'Valid input', helperText: 'This looks good!' }"
+								[config]="{ state: 'success', readonly: true }">
+							</ui-input>
+							<ui-input 
+								[data]="{ label: 'Error State', value: 'Invalid input', helperText: 'Please fix this error' }"
+								[config]="{ state: 'error' }">
+							</ui-input>
+						</div>
+					</div>
+
+					<!-- Textarea and Selection -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-green-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Text & Selection</h3>
+						</div>
+						<div class="space-y-6">
+							<ui-textarea 
+								[data]="{ label: 'Description', placeholder: 'Enter description...', maxLength: 200, value: textareaValue() }"
+								[config]="{ rows: 3, autoResize: true }"
+								(onInput)="onTextareaChange($event)">
+							</ui-textarea>
+							<ui-select 
+								[data]="{
+									label: 'Country',
+									placeholder: 'Select country',
+									value: selectValue(),
+									options: [
+										{ value: 'us', label: 'United States' },
+										{ value: 'ca', label: 'Canada' },
+										{ value: 'uk', label: 'United Kingdom' },
+										{ value: 'de', label: 'Germany' }
+									]
+								}"
+								[config]="{ searchable: true }"
+								(onChange)="onSelectChange($event)">
+							</ui-select>
+						</div>
+					</div>
+
+					<!-- Checkboxes and Radio -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Choices</h3>
+						</div>
+						<div class="space-y-6">
+							<div class="space-y-3">
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300">Checkboxes</h4>
+								<ui-checkbox 
+									[data]="{ label: 'Newsletter subscription', description: 'Get updates about new features', checked: checkboxValue() }"
+									[config]="{ size: 'md' }"
+									(onChange)="onCheckboxChange($event)">
+								</ui-checkbox>
+								<ui-checkbox 
+									[data]="{ label: 'Terms and conditions', checked: true }"
+									[config]="{ size: 'md' }">
+								</ui-checkbox>
+							</div>
+							<div class="space-y-3">
+								<ui-radio 
+									[data]="{
+										label: 'Plan Selection',
+										options: [
+											{ value: 'basic', label: 'Basic', description: 'Perfect for individuals' },
+											{ value: 'pro', label: 'Pro', description: 'Great for teams' },
+											{ value: 'enterprise', label: 'Enterprise', description: 'For large organizations' }
+										],
+										value: radioValue() || 'pro'
+									}"
+									[config]="{ orientation: 'vertical' }"
+									(onChange)="onRadioChange($event)">
+								</ui-radio>
+							</div>
+						</div>
+					</div>
+
+					<!-- Toggles and Controls -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Toggles & Controls</h3>
+						</div>
+						<div class="space-y-6">
+							<ui-toggle 
+								[data]="{ label: 'Dark Mode', description: 'Switch between light and dark themes', checked: toggleStates().darkMode }"
+								[config]="{ size: 'md', color: 'blue' }"
+								(onChange)="onToggleChange('darkMode', $event)">
+							</ui-toggle>
+							<ui-toggle 
+								[data]="{ label: 'Email Notifications', checked: toggleStates().emailNotifications }"
+								[config]="{ size: 'md', color: 'green' }"
+								(onChange)="onToggleChange('emailNotifications', $event)">
+							</ui-toggle>
+							<ui-toggle 
+								[data]="{ label: 'Auto-save', description: 'Automatically save your work', checked: toggleStates().autoSave }"
+								[config]="{ size: 'lg', color: 'purple', labelPosition: 'left' }"
+								(onChange)="onToggleChange('autoSave', $event)">
+							</ui-toggle>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<!-- Tech Stack Items Section -->
 			<section id="tech-stack" class="scroll-mt-24">
 				<div class="text-center mb-12">
@@ -392,10 +540,24 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComponentShowcaseComponent {
+	// Form state management
+	toggleStates = signal({
+		darkMode: false,
+		emailNotifications: true,
+		autoSave: false
+	});
+
+	selectValue = signal<string>('');
+	inputValue = signal('');
+	textareaValue = signal('');
+	checkboxValue = signal(false);
+	radioValue = signal('');
+
 	navigationSections = signal([
 		{ id: 'buttons', label: '🎯 Buttons' },
 		{ id: 'badges', label: '🏷️ Badges' },
 		{ id: 'cards', label: '📋 Cards' },
+		{ id: 'forms', label: '📝 Forms' },
 		{ id: 'tech-stack', label: '⚡ Tech Stack' },
 		{ id: 'code-windows', label: '💻 Code Windows' }
 	]);
@@ -486,4 +648,32 @@ export class ComponentShowcaseComponent {
 			{ type: 'normal' as const, content: 'npx nx build ui --prod' }
 		]
 	});
+
+	// Event handlers for form components
+	onToggleChange(key: 'darkMode' | 'emailNotifications' | 'autoSave', value: boolean): void {
+		this.toggleStates.update(current => ({
+			...current,
+			[key]: value
+		}));
+	}
+
+	onSelectChange(value: string | number | (string | number)[]): void {
+		this.selectValue.set(String(value));
+	}
+
+	onInputChange(value: string): void {
+		this.inputValue.set(value);
+	}
+
+	onTextareaChange(value: string): void {
+		this.textareaValue.set(value);
+	}
+
+	onCheckboxChange(value: boolean): void {
+		this.checkboxValue.set(value);
+	}
+
+	onRadioChange(value: string | number): void {
+		this.radioValue.set(String(value));
+	}
 }
