@@ -1,11 +1,18 @@
 import { ChangeDetectionStrategy, Component, signal, inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { ThemeService } from '@ai-optimized-angular-template/services';
+import { ThemeToggleComponent } from '@ai-optimized-angular-template/components';
 
 @Component({
 	selector: 'lib-pages',
-	imports: [],
+	imports: [ThemeToggleComponent],
 	template: `
 		<div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-300">
+			<!-- Theme Toggle - Fixed Position -->
+			<div class="fixed top-6 right-6 z-50">
+				<ui-theme-toggle></ui-theme-toggle>
+			</div>
+			
 			<!-- Hero Section -->
 			<header class="relative overflow-hidden">
 				<div class="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 dark:from-blue-400/5 dark:to-purple-400/5"></div>
@@ -238,31 +245,34 @@ import { DOCUMENT } from '@angular/common';
 		</div>
 	`,
 	styles: `
-		@keyframes fade-in {
-			from {
-				opacity: 0;
-				transform: translateY(20px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		.animate-fade-in {
-			animation: fade-in 0.6s ease-out forwards;
-		}
-
 		:host {
 			display: block;
 			width: 100%;
 			min-height: 100vh;
+		}
+
+		/* Custom scrollbar for webkit browsers */
+		:host ::ng-deep ::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		:host ::ng-deep ::-webkit-scrollbar-track {
+			@apply bg-slate-100 dark:bg-slate-800;
+		}
+
+		:host ::ng-deep ::-webkit-scrollbar-thumb {
+			@apply bg-slate-400 dark:bg-slate-600 rounded-full;
+		}
+
+		:host ::ng-deep ::-webkit-scrollbar-thumb:hover {
+			@apply bg-slate-500 dark:bg-slate-500;
 		}
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PagesComponent {
 	private document = inject(DOCUMENT);
+	protected themeService = inject(ThemeService);
 
 	features = signal([
 		{

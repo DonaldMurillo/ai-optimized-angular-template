@@ -2,4 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can add global styles to this file, and also import other style files */
+/* Global theme-aware styles */
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply transition-colors duration-300;
+	}
+
+	/* Ensure proper theme class is applied */
+	html.light {
+		color-scheme: light;
+	}
+
+	html.dark {
+		color-scheme: dark;
+	}
+
+	/* Custom scrollbar for webkit browsers */
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	::-webkit-scrollbar-track {
+		@apply bg-slate-100 dark:bg-slate-800;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply bg-slate-400 dark:bg-slate-600 rounded-full;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		@apply bg-slate-500 dark:bg-slate-500;
+	}
+
+	/* Firefox scrollbar */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: theme('colors.slate.400') theme('colors.slate.100');
+	}
+
+	html.dark * {
+		scrollbar-color: theme('colors.slate.600') theme('colors.slate.800');
+	}
+}
+
+@layer components {
+	/* Custom animation classes that complement Tailwind's */
+	.animate-fade-in-delayed {
+		animation: fade-in 0.8s ease-out 0.2s both;
+	}
+
+	.animate-slide-in-delayed {
+		animation: slide-in 0.6s ease-out 0.3s both;
+	}
+
+	/* Custom gradient text that works well in both themes */
+	.gradient-text-primary {
+		@apply bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 dark:from-blue-400 dark:via-purple-400 dark:to-blue-300 bg-clip-text text-transparent;
+	}
+
+	.gradient-text-secondary {
+		@apply bg-gradient-to-r from-slate-700 via-slate-900 to-slate-700 dark:from-slate-300 dark:via-slate-100 dark:to-slate-300 bg-clip-text text-transparent;
+	}
+}
