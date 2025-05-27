@@ -192,18 +192,36 @@ import { TechStackItemComponent } from '../tech-stack-item/tech-stack-item.compo
 							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Live Updates</h3>
 						</div>
 						<div class="space-y-3">
-							<ui-badge 
-								[data]="{ text: 'Live Status', icon: '🟢' }"
-								[config]="{ variant: 'status', color: 'green', showDot: true, animate: true }">
-							</ui-badge>
-							<ui-badge 
-								[data]="{ text: 'Processing', icon: '⚡' }"
-								[config]="{ variant: 'status', color: 'yellow', showDot: true, animate: true }">
-							</ui-badge>
-							<ui-badge 
-								[data]="{ text: 'Critical Alert', icon: '🚨' }"
-								[config]="{ variant: 'status', color: 'red', showDot: true, animate: true }">
-							</ui-badge>
+							<div class="animate-pulse">
+								<ui-badge 
+									[data]="{ text: 'Live Status', icon: '🟢' }"
+									[config]="{ variant: 'status', color: 'green', showDot: true }">
+								</ui-badge>
+							</div>
+							<div class="animate-bounce">
+								<ui-badge 
+									[data]="{ text: 'Processing', icon: '⚡' }"
+									[config]="{ variant: 'status', color: 'yellow', showDot: true }">
+								</ui-badge>
+							</div>
+							<div class="animate-ping">
+								<ui-badge 
+									[data]="{ text: 'Critical Alert', icon: '🚨' }"
+									[config]="{ variant: 'status', color: 'red', showDot: true }">
+								</ui-badge>
+							</div>
+							<div class="animate-spin">
+								<ui-badge 
+									[data]="{ text: 'Loading', icon: '⏳' }"
+									[config]="{ variant: 'status', color: 'blue', showDot: true }">
+								</ui-badge>
+							</div>
+							<div class="animate-pulse hover:animate-bounce transition-all duration-300">
+								<ui-badge 
+									[data]="{ text: 'Interactive', icon: '✨' }"
+									[config]="{ variant: 'status', color: 'purple', showDot: true }">
+								</ui-badge>
+							</div>
 						</div>
 					</div>
 				</div>
