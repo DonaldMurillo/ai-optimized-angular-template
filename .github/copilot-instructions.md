@@ -82,3 +82,10 @@ export class ModernExampleComponent {
 - **New Control Flow Syntax:** Use Angular's improved flow control instead of structural directives
 - **Dependency Injection:** Prefer the `inject()` function in standalone components
 - **Indentation** Use tabs and set them as 3 spaces
+
+## 4. imports
+
+To make it easy I simplified some of the imports
+
+- Design system components `@ui/components`
+- Widgets `@ui/widgets`

@@ -60,7 +60,7 @@
       "@ai-optimized-angular-template/utils": [
         "libs/shared/utils/src/index.ts"
       ],
-      "@ai-optimized-angular-template/widgets": ["libs/ui/widgets/src/index.ts"]
+      "@ui/widgets": ["libs/ui/widgets/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
