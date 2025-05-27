@@ -10,6 +10,11 @@ import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { RadioComponent } from '../radio/radio.component';
 import { ToggleComponent } from '../toggle/toggle.component';
 import { SelectComponent } from '../select/select.component';
+import { AlertComponent } from '../alert/alert.component';
+import { LoadingComponent } from '../loading/loading.component';
+import { ProgressComponent } from '../progress/progress.component';
+import { ToastComponent } from '../toast/toast.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
 
 @Component({
 	selector: 'ui-component-showcase',
@@ -25,7 +30,12 @@ import { SelectComponent } from '../select/select.component';
 		CheckboxComponent,
 		RadioComponent,
 		ToggleComponent,
-		SelectComponent
+		SelectComponent,
+		AlertComponent,
+		LoadingComponent,
+		ProgressComponent,
+		ToastComponent,
+		TooltipComponent
 	],
 	host: {
 		class: 'block bg-gray-50 dark:bg-gray-900 min-h-screen'
@@ -418,6 +428,190 @@ import { SelectComponent } from '../select/select.component';
 				</div>
 			</section>
 
+			<!-- Feedback Components Section -->
+			<section id="feedback" class="scroll-mt-24">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-3 mb-4">
+						<span class="text-2xl">💬</span>
+						<h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+							Feedback Components
+						</h2>
+					</div>
+					<p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+						User feedback elements including alerts, loading indicators, progress bars, toasts, and tooltips
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<!-- Alerts -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Alert Messages</h3>
+						</div>
+						<div class="space-y-4">
+							<ui-alert 
+								[data]="{ title: 'Success!', message: 'Your changes have been saved successfully.' }"
+								[config]="{ variant: 'success', dismissible: true, showIcon: true }">
+							</ui-alert>
+							<ui-alert 
+								[data]="{ title: 'Warning', message: 'Please review your input before continuing.' }"
+								[config]="{ variant: 'warning', dismissible: true, showIcon: true }">
+							</ui-alert>
+							<ui-alert 
+								[data]="{ title: 'Error', message: 'Something went wrong. Please try again.' }"
+								[config]="{ variant: 'error', dismissible: true, showIcon: true }">
+							</ui-alert>
+							<ui-alert 
+								[data]="{ message: 'This is an informational message for users.' }"
+								[config]="{ variant: 'info', showIcon: true }">
+							</ui-alert>
+						</div>
+					</div>
+
+					<!-- Loading Indicators -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-blue-500 rounded-full animate-spin"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Loading States</h3>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Spinner Types</h4>
+								<div class="grid grid-cols-2 gap-4">
+									<div class="flex flex-col items-center gap-2">
+										<ui-loading 
+											[data]="{ show: true }"
+											[config]="{ type: 'spinner', size: 'md', color: 'primary' }">
+										</ui-loading>
+										<span class="text-xs text-gray-500">Spinner</span>
+									</div>
+									<div class="flex flex-col items-center gap-2">
+										<ui-loading 
+											[data]="{ show: true }"
+											[config]="{ type: 'dots', size: 'md', color: 'success' }">
+										</ui-loading>
+										<span class="text-xs text-gray-500">Dots</span>
+									</div>
+									<div class="flex flex-col items-center gap-2">
+										<ui-loading 
+											[data]="{ show: true }"
+											[config]="{ type: 'pulse', size: 'md', color: 'secondary' }">
+										</ui-loading>
+										<span class="text-xs text-gray-500">Pulse</span>
+									</div>
+									<div class="flex flex-col items-center gap-2">
+										<ui-loading 
+											[data]="{ show: true }"
+											[config]="{ type: 'bars', size: 'md', color: 'error' }">
+										</ui-loading>
+										<span class="text-xs text-gray-500">Bars</span>
+									</div>
+								</div>
+							</div>
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">With Text</h4>
+								<ui-loading 
+									[data]="{ text: 'Loading your data...', show: true }"
+									[config]="{ type: 'spinner', size: 'lg', color: 'primary' }">
+								</ui-loading>
+							</div>
+						</div>
+					</div>
+
+					<!-- Progress Bars -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-green-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Progress Indicators</h3>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Determinate Progress</h4>
+								<ui-progress 
+									[data]="{ label: 'Upload Progress', value: progressValue() }"
+									[config]="{ variant: 'primary', showLabel: true }">
+								</ui-progress>
+							</div>
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Striped Progress</h4>
+								<ui-progress 
+									[data]="{ label: 'Processing...', value: 75 }"
+									[config]="{ variant: 'success', animated: true, striped: true }">
+								</ui-progress>
+							</div>
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Indeterminate</h4>
+								<ui-progress 
+									[data]="{ label: 'Loading...' }"
+									[config]="{ variant: 'secondary', indeterminate: true }">
+								</ui-progress>
+							</div>
+						</div>
+					</div>
+
+					<!-- Tooltips and Toasts -->
+					<div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+						<div class="flex items-center gap-3 mb-6">
+							<div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+							<h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Interactive Feedback</h3>
+						</div>
+						<div class="space-y-6">
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Tooltips</h4>
+								<div class="flex flex-wrap gap-4">
+									<ui-tooltip 
+										[data]="{ content: 'This is a helpful tooltip' }"
+										[config]="{ position: 'top', trigger: 'hover', delay: 500 }">
+										<button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+											Hover me
+										</button>
+									</ui-tooltip>
+									<ui-tooltip 
+										[data]="{ content: 'Click to see this tooltip' }"
+										[config]="{ position: 'bottom', trigger: 'click' }">
+										<button class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+											Click me
+										</button>
+									</ui-tooltip>
+								</div>
+							</div>
+							<div>
+								<h4 class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Toast Notifications</h4>
+								<div class="space-y-3">
+									<button 
+										(click)="showToast('success')"
+										class="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
+										Show Success Toast
+									</button>
+									<button 
+										(click)="showToast('error')"
+										class="w-full px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors">
+										Show Error Toast
+									</button>
+									<button 
+										(click)="showToast('info')"
+										class="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+										Show Info Toast
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Toast Container -->
+				@if (showingToast()) {
+					<div class="fixed top-4 right-4 z-50">
+						<ui-toast 
+							[data]="toastData()"
+							[config]="{ position: 'top-right', duration: 3000, dismissible: true }"
+							(onDismiss)="hideToast()">
+						</ui-toast>
+					</div>
+				}
+			</section>
+
 			<!-- Tech Stack Items Section -->
 			<section id="tech-stack" class="scroll-mt-24">
 				<div class="text-center mb-12">
@@ -553,11 +747,25 @@ export class ComponentShowcaseComponent {
 	checkboxValue = signal(false);
 	radioValue = signal('');
 
+	// Feedback component state
+	progressValue = signal(60);
+	showingToast = signal(false);
+	toastData = signal<{
+		title?: string;
+		message: string;
+		icon?: string;
+		variant: 'success' | 'error' | 'warning' | 'info';
+	}>({
+		message: '',
+		variant: 'info'
+	});
+
 	navigationSections = signal([
 		{ id: 'buttons', label: '🎯 Buttons' },
 		{ id: 'badges', label: '🏷️ Badges' },
 		{ id: 'cards', label: '📋 Cards' },
 		{ id: 'forms', label: '📝 Forms' },
+		{ id: 'feedback', label: '💬 Feedback' },
 		{ id: 'tech-stack', label: '⚡ Tech Stack' },
 		{ id: 'code-windows', label: '💻 Code Windows' }
 	]);
@@ -675,5 +883,25 @@ export class ComponentShowcaseComponent {
 
 	onRadioChange(value: string | number): void {
 		this.radioValue.set(String(value));
+	}
+
+	// Feedback component methods
+	showToast(type: 'success' | 'error' | 'warning' | 'info'): void {
+		const messages = {
+			success: { title: 'Success!', message: 'Operation completed successfully.', icon: '✅' },
+			error: { title: 'Error', message: 'Something went wrong. Please try again.', icon: '❌' },
+			warning: { title: 'Warning', message: 'Please review your input.', icon: '⚠️' },
+			info: { title: 'Info', message: 'Here is some helpful information.', icon: 'ℹ️' }
+		};
+
+		this.toastData.set({
+			...messages[type],
+			variant: type
+		});
+		this.showingToast.set(true);
+	}
+
+	hideToast(): void {
+		this.showingToast.set(false);
 	}
 }

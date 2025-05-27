@@ -14,5 +14,12 @@ export * from './lib/radio/radio.component';
 export * from './lib/toggle/toggle.component';
 export * from './lib/select/select.component';
 
+// Feedback Components
+export * from './lib/alert/alert.component';
+export * from './lib/loading/loading.component';
+export * from './lib/progress/progress.component';
+export * from './lib/toast/toast.component';
+export * from './lib/tooltip/tooltip.component';
+
 // Component Showcase
 export * from './lib/component-showcase/component-showcase.component';

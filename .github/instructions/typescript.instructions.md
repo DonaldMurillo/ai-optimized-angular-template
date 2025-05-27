@@ -16,3 +16,4 @@ applyTo: '**/*.ts'
 
 - use 2 inputs for components: `data` and `config`. `data` is the data to be displayed, `config` is the configuration for the component. Config can have a property `classNames` which is a object with node names with class names to be applied to the node. use `config.classNames.host` for base component
 - use the `host` property in the component decorator instead of hostbinding decorator
+- do not worry about unit tests for components, we will add them later
