@@ -9,7 +9,7 @@ import {
 	CodeWindowComponent,
 	BadgeComponent,
 	TechStackItemComponent
-} from '@ai-optimized-angular-template/components';
+} from '@ui/components';
 
 @Component({
 	selector: 'lib-pages',

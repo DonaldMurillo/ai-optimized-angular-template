@@ -27,7 +27,7 @@
       "@ai-optimized-angular-template/api-services": [
         "libs/api/services/src/index.ts"
       ],
-      "@ai-optimized-angular-template/components": [
+      "@ui/components": [
         "libs/ui/components/src/index.ts"
       ],
       "@ai-optimized-angular-template/consts": [
