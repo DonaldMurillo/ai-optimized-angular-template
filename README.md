@@ -130,6 +130,10 @@ And join the Nx community:
 
 - Add libs
 
+### Vibe coding
+
+- It went well until the showcase component hit 1200 lines of code
+
 
 ### Prisma
 

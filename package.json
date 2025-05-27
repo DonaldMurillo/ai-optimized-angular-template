@@ -2,7 +2,11 @@
   "name": "@ai-optimized-angular-template/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "nx run-many -t test",
+    "test:e2e": "nx e2e ui-e2e",
+    "test:all": "npm run test && npm run test:e2e"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~19.2.0",
