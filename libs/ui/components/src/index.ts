@@ -23,4 +23,3 @@ export * from './lib/theme-toggle/theme-toggle.component';
 export * from './lib/toast/toast.component';
 export * from './lib/toggle/toggle.component';
 export * from './lib/tooltip/tooltip.component';
-export * from './test-setup';

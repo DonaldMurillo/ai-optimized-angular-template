@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
 import { TechStackItemComponent } from '@ui/components';
 
 export interface TechStackItem {
@@ -127,8 +127,8 @@ export interface TechStackInteractionEvent {
 						<div class="flex -space-x-2">
 							@for (item of getOverviewItems(); track item.name) {
 								<div
-									class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white dark:border-gray-800 bg-gradient-to-r"
-									[class]="item.gradient"
+									class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white dark:border-gray-800"
+									[class]="'bg-gradient-to-r ' + item.gradient"
 									[title]="item.name">
 									{{ item.icon }}
 								</div>
@@ -443,145 +443,4 @@ export class TechStackShowcaseWidget {
 		}
 	}
 } 
-									class="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-bold border-2 border-white dark:border-gray-800"
-									[class]="'bg-gradient-to-r ' + item.gradient"
-									[title]="item.name">
-									{{ item.icon }}
-								</div>
-							}
-						</div>
-						<div class="text-left">
-							<p class="font-semibold text-gray-900 dark:text-gray-100">Modern Stack</p>
-							<p class="text-sm text-gray-600 dark:text-gray-400">Built with cutting-edge technologies</p>
-						</div>
-					</div>
-				</div>
-			}
-
-			<!-- Additional Tech Stack Information -->
-			@if (config().variant !== 'categories') {
-				<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
-						<div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mx-auto mb-4">
-							<span class="text-blue-600 dark:text-blue-400 text-xl">🚀</span>
-						</div>
-						<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Performance</h4>
-						<p class="text-gray-600 dark:text-gray-400 text-sm">Optimized for speed and efficiency with modern tooling</p>
-					</div>
-					<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
-						<div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-4">
-							<span class="text-green-600 dark:text-green-400 text-xl">🔧</span>
-						</div>
-						<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Developer Experience</h4>
-						<p class="text-gray-600 dark:text-gray-400 text-sm">Type-safe development with excellent tooling support</p>
-					</div>
-					<div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 text-center">
-						<div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mx-auto mb-4">
-							<span class="text-purple-600 dark:text-purple-400 text-xl">🌟</span>
-						</div>
-						<h4 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">Modern Standards</h4>
-						<p class="text-gray-600 dark:text-gray-400 text-sm">Following current best practices and industry standards</p>
-					</div>
-				</div>
-			}
-
-			<!-- Technology Statistics -->
-			@if (data().items.length > 0) {
-				<div class="mt-12 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-3xl p-8">
-					<h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">
-						Technology Stack Statistics
-					</h3>
-					<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-						<div class="text-center">
-							<div class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ getTotalTechnologies() }}</div>
-							<div class="text-sm text-gray-600 dark:text-gray-400">Technologies</div>
-						</div>
-						<div class="text-center">
-							<div class="text-3xl font-bold text-green-600 dark:text-green-400">{{ getFrameworkCount() }}</div>
-							<div class="text-sm text-gray-600 dark:text-gray-400">Frameworks</div>
-						</div>
-						<div class="text-center">
-							<div class="text-3xl font-bold text-purple-600 dark:text-purple-400">{{ getToolCount() }}</div>
-							<div class="text-sm text-gray-600 dark:text-gray-400">Tools</div>
-						</div>
-						<div class="text-center">
-							<div class="text-3xl font-bold text-orange-600 dark:text-orange-400">{{ getLanguageCount() }}</div>
-							<div class="text-sm text-gray-600 dark:text-gray-400">Languages</div>
-						</div>
-					</div>
-				</div>
-			}
-		</section>
-	`,
-	changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class TechStackShowcaseWidget {
-	data = input.required<TechStackShowcaseData>();
-	config = input<TechStackShowcaseConfig>({
-		variant: 'grid',
-		showOverview: true,
-		enableHover: true,
-		columns: 2
-	});
-
-	// Outputs
-	itemInteraction = output<TechStackInteractionEvent>();
-
-	getGridClasses(): string {
-		const baseClasses = 'grid gap-6';
-		const columnClasses = {
-			1: 'grid-cols-1',
-			2: 'grid-cols-1 md:grid-cols-2',
-			3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
-			4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-		};
-		
-		return `${baseClasses} ${columnClasses[this.config().columns]}`;
-	}
-
-	getOverviewItems(): TechStackItem[] {
-		return this.data().items.slice(0, 6); // Show first 6 items in overview
-	}
-
-	getTotalTechnologies(): number {
-		return this.data().items.length;
-	}
-
-	getFrameworkCount(): number {
-		return this.data().items.filter(item => 
-			item.category?.toLowerCase().includes('framework') || 
-			item.name.toLowerCase().includes('angular') ||
-			item.name.toLowerCase().includes('react') ||
-			item.name.toLowerCase().includes('vue')
-		).length;
-	}
-
-	getToolCount(): number {
-		return this.data().items.filter(item => 
-			item.category?.toLowerCase().includes('tool') || 
-			item.name.toLowerCase().includes('nx') ||
-			item.name.toLowerCase().includes('webpack') ||
-			item.name.toLowerCase().includes('vite')
-		).length;
-	}
-
-	getLanguageCount(): number {
-		return this.data().items.filter(item => 
-			item.category?.toLowerCase().includes('language') || 
-			item.name.toLowerCase().includes('typescript') ||
-			item.name.toLowerCase().includes('javascript') ||
-			item.name.toLowerCase().includes('html') ||
-			item.name.toLowerCase().includes('css')
-		).length;
-	}
-
-	handleItemClick(item: TechStackItem): void {
-		this.itemInteraction.emit({ type: 'click', item });
-	}
-
-	handleItemHover(item: TechStackItem): void {
-		if (this.config().enableHover) {
-			this.itemInteraction.emit({ type: 'hover', item });
-		}
-	}
-}
+									
