@@ -6,7 +6,8 @@ import { PrismaService } from '@ai-optimized-angular-template/prisma';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { WinstonModule } from 'nest-winston';
 import { TerminusModule } from '@nestjs/terminus';
-import { HealthController } from '@ai-optimized-angular-template/api-controllers';
+import { HealthController, FileController } from '@ai-optimized-angular-template/api-controllers';
+import { FileService } from '@ai-optimized-angular-template/api-services';
 import { LoggingInterceptor } from '@ai-optimized-angular-template/api-interceptors';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import * as winston from 'winston';
@@ -66,10 +67,11 @@ import * as winston from 'winston';
       ],
     }),
   ],
-  controllers: [AppController, HealthController],
+  controllers: [AppController, HealthController, FileController],
   providers: [
     AppService, 
     PrismaService,
+    FileService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

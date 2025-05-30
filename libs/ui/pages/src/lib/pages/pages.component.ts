@@ -60,6 +60,11 @@ import {
 								(click)="navigateToShowcase()">
 							</ui-button>
 							<ui-button 
+								[data]="{ text: 'File Management', icon: '📁' }"
+								[config]="{ variant: 'secondary', size: 'lg' }"
+								(click)="navigateToFiles()">
+							</ui-button>
+							<ui-button 
 								[data]="{ text: 'Tech Stack' }"
 								[config]="{ variant: 'ghost', size: 'lg' }"
 								(click)="scrollToSection('stack')">
@@ -437,5 +442,9 @@ export class PagesComponent {
 
 	navigateToShowcase(): void {
 		this.router.navigate(['/showcase']);
+	}
+
+	navigateToFiles(): void {
+		this.router.navigate(['/files']);
 	}
 }

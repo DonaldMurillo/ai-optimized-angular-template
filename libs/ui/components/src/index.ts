@@ -7,6 +7,8 @@ export * from './lib/card/card.component';
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/code-window/code-window.component';
 export * from './lib/components/components.component';
+export * from './lib/file-manager/file-manager.component';
+export * from './lib/file-upload/file-upload.component';
 export * from './lib/input/input.component';
 export * from './lib/loading/loading.component';
 export * from './lib/modal/modal.component';

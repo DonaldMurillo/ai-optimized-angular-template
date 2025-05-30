@@ -21,6 +21,7 @@ model User {
   updatedAt DateTime @updatedAt
   
   profile   Profile?
+  files     File[]
   
   @@map("users")
 }
@@ -38,4 +39,21 @@ model Profile {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   @@map("profiles")
+}
+
+model File {
+  id          String   @id @default(uuid())
+  filename    String
+  originalName String
+  mimetype    String
+  size        Int
+  data        Bytes
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Optional: associate with user who uploaded
+  uploadedById String?
+  uploadedBy   User?   @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  
+  @@map("files")
 }
