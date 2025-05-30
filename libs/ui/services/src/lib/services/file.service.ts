@@ -40,7 +40,7 @@ export interface FileQueryParams {
 })
 export class FileService {
 	private readonly http = inject(HttpClient);
-	private readonly baseUrl = '/api/files';
+	private readonly baseUrl = 'http://localhost:3000/api/files';
 
 	// Reactive state
 	readonly uploadProgress = signal<FileUploadProgress | null>(null);
